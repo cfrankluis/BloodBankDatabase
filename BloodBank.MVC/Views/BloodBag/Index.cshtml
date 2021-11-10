@@ -1,0 +1,90 @@
+﻿@model IEnumerable<BloodBank.Models.BloodBag.BloodBagListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="inventory">
+    <h2>Inventory</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Volume)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DaysStored)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodType)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Volume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DaysStored)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodValue)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.BloodID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.BloodID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.BloodID }) |
+                    @Html.ActionLink("detail", "Detail", new { id = item.BloodID })
+                    @*<a href="/BloodBag/Detail/@item.BloodID" id="anchorDetail">detail</a>*@
+                    @*<a data-toggle="modal" data-target="#exampleModal" data-id="@item.BloodID">detail</a>*@
+                    @*                <a href="/BloodBag/modal">detail</a>*@
+                </td>
+            </tr>
+
+        }
+
+    </table>
+</div>
+
+@*<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=@("@mdo")>Open modal for @("@mdo")</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=@("@fat")>Open modal for @("@fat")</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever=@("@getbootstrap")>Open modal for @("@getbootstrap")</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>*@

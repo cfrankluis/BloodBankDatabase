@@ -8,16 +8,27 @@ using System.Threading.Tasks;
 
 namespace BloodBank.Data
 {
+    public enum StatusValues
+    {
+        UPCOMING,
+        CHECKEDIN,
+        INPROGRESS,
+        PAST
+    }
+
     public class DonorAppointment
     {
         [Key]
         public int ID { get; set; }
+
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime AppointmentTime { get; set; }
+
+        [Required]
+        public StatusValues Status { get; set; }
 
         [ForeignKey(nameof(Donor))]
         public Guid DonorID { get; set; }
         public virtual Donor Donor { get; set; }
-
     }
 }

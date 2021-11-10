@@ -35,6 +35,6 @@ namespace BloodBank.Data
 
         public virtual IEnumerable<Patient> Patients { get; set; } = new List<Patient>();
         public virtual IEnumerable<Donor> Donors { get; set; } = new List<Donor>();
-        public virtual IEnumerable<Blood> Inventory { get; set; } = new List<Blood>();
+        public virtual IEnumerable<BloodBag> Inventory { get; set; } = new List<BloodBag>();
     }
 }

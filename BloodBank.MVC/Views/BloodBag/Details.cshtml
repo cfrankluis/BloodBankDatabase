@@ -1,0 +1,58 @@
+﻿@model BloodBank.Models.BloodBag.BloodBagDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BloodBagDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BloodID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BloodID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Volume)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Volume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DaysStored)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DaysStored)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExtractionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExtractionDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BloodType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BloodValue)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BloodID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

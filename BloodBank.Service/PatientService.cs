@@ -8,7 +8,7 @@ using BloodBank.Data;
 
 namespace BloodBank.Service
 {
-    public class PatientServices
+    public class PatientService
     {
         public bool CreatePatient(PatientCreate model)
         {
@@ -76,6 +76,8 @@ namespace BloodBank.Service
                     };
             }
         }
+
+
 
         public bool UpdatePatient(PatientEdit model)
         {

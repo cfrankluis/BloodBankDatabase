@@ -42,6 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BloodBag\BloodBagCreate.cs" />
+    <Compile Include="BloodBag\BloodBagDetail.cs" />
+    <Compile Include="BloodBag\BloodBagEdit.cs" />
+    <Compile Include="BloodBag\BloodBagListItem.cs" />
+    <Compile Include="DonorAppointment\AppoinmentListItem.cs" />
+    <Compile Include="DonorAppointment\AppointmentCreate.cs" />
+    <Compile Include="DonorAppointment\AppointmentDetail.cs" />
+    <Compile Include="DonorAppointment\AppointmentEdit.cs" />
     <Compile Include="Donor\DonorCreate.cs" />
     <Compile Include="Donor\DonorDetail.cs" />
     <Compile Include="Donor\DonorEdit.cs" />

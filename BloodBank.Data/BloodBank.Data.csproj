@@ -57,7 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Blood.cs" />
+    <Compile Include="BloodBag.cs" />
     <Compile Include="BloodOrder.cs" />
     <Compile Include="BloodTable.cs" />
     <Compile Include="Donor.cs" />

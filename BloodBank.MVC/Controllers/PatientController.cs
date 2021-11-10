@@ -12,12 +12,12 @@ namespace BloodBank.MVC.Controllers
     [Authorize]
     public class PatientController : Controller
     {
+        private readonly PatientService _service = new PatientService();
+
         // GET: Patient
         public ActionResult Index()
         {
-            var service = new PatientServices();
-
-            return View(service.GetAllPatients());
+            return View(_service.GetAllPatients());
         }
 
         public ActionResult Create()
@@ -28,14 +28,40 @@ namespace BloodBank.MVC.Controllers
             
         }
 
+        public ActionResult _PartialCreate()
+        {
+            var viewModel = new PatientCreate();
+
+            TempData["PatientCreate"] = viewModel;
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult _PartialCreate(PatientCreate model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_service.CreatePatient(model))
+                {
+                    TempData["SaveResult"] = "A new patient was created.";
+                    return RedirectToAction("Index");
+                }
+            }
+
+            ModelState.AddModelError("", "Patient could not be created.");
+
+            return View(model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(PatientCreate model)
         {
             if (ModelState.IsValid)
             {
-                var service = new PatientServices();
-                if (service.CreatePatient(model))
+                if (_service.CreatePatient(model))
                 {
                     TempData["SaveResult"] = "A new patient was created.";
                     return RedirectToAction("Index");
@@ -52,9 +78,7 @@ namespace BloodBank.MVC.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            var service = new PatientServices();
-
-            var model = service.GetPatientByID((int)id);
+            var model = _service.GetPatientByID((int)id);
 
             if (model is null)
                 return HttpNotFound();
@@ -62,14 +86,25 @@ namespace BloodBank.MVC.Controllers
             return View(model);
         }
 
+        [ActionName("_PartialDetails")]
+        public ActionResult _PartialDetails(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            TempData["PatientDetails"] = _service.GetPatientByID((int)id);
+            if (TempData["PatientDetails"] is null)
+                return HttpNotFound();
+
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Delete(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            var service = new PatientServices();
-
-            var model = service.GetPatientByID((int)id);
+            var model = _service.GetPatientByID((int)id);
 
             if (model is null)
                 return HttpNotFound();
@@ -81,8 +116,7 @@ namespace BloodBank.MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
-            var service = new PatientServices();
-            if(service.DeletePatient(id))
+            if(_service.DeletePatient(id))
             {
                 TempData["SaveResult"] = "A patient was deleted.";
                 return RedirectToAction("Index");
@@ -98,8 +132,7 @@ namespace BloodBank.MVC.Controllers
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            var service = new PatientServices();
-            var detail = service.GetPatientByID((int)id);
+            var detail = _service.GetPatientByID((int)id);
 
             if (detail is null)
                 return HttpNotFound();
@@ -128,9 +161,7 @@ namespace BloodBank.MVC.Controllers
                     return View(model);
                 }
 
-                var service = new PatientServices();
-
-                if(service.UpdatePatient(model))
+                if(_service.UpdatePatient(model))
                 {
                     TempData["SaveResult"] = "A patient was updated";
                     return RedirectToAction("Index");

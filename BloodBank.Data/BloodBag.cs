@@ -8,25 +8,34 @@ using System.Threading.Tasks;
 
 namespace BloodBank.Data
 {
-    public class Blood
+    public class BloodBag
     {
         [Key]
         public int ID { get; set; }
 
         [Required]
+        [Range(0,double.PositiveInfinity)]
         public double Volume { get; set; }
 
         [Required]
         public DateTime ExtractionDate { get; set; }
 
-        [ForeignKey(nameof(Donor))]
+/*        [ForeignKey(nameof(Donor))]
         public Guid DonorId { get; set; }
-        public virtual Donor Donor { get; set; }
+        public virtual Donor Donor { get; set; }*/
+
 
         [ForeignKey(nameof(BloodTable))]
-        public BloodType BloodType { get { return Donor.BloodType; } private set { } }
+        public BloodType BloodType { get; set; }
         public virtual BloodTable BloodTable { get; set; }
 
-        public int DaysStored { get { return (ExtractionDate - DateTime.Now).Days; } private set { } }
+        public double DaysStored 
+        { get 
+            { 
+                double days = (DateTime.Now - ExtractionDate).TotalDays;
+                return days > 1 ? Math.Round(days, 2) : 0;
+            } 
+            private set { } 
+        }
     }
 }

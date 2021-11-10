@@ -34,10 +34,10 @@ namespace BloodBank.Data
 
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Donor> Donors { get; set; }
-        public DbSet<Blood> Inventory { get; set; }
+        public DbSet<BloodBag> BloodBags { get; set; }
         public DbSet<BloodOrder> Orders { get; set; }
         public DbSet<DonorAppointment> Appointments { get; set; }
-        public DbSet<BloodTable> Table {get; set;}
+        public DbSet<BloodTable> Inventory {get; set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -56,16 +56,16 @@ namespace BloodBank.Data
 
             // Create my debug (testing) objects here
             var TestMyClass = new BloodTable() { Type = BloodType.Ap };
-            Context.Table.Add(TestMyClass);
+            Context.Inventory.Add(TestMyClass);
 
             // Normal seeding goes here
-            Context.Table.Add(new BloodTable() { Type = BloodType.An });
-            Context.Table.Add(new BloodTable() { Type = BloodType.Bp });
-            Context.Table.Add(new BloodTable() { Type = BloodType.Bn });
-            Context.Table.Add(new BloodTable() { Type = BloodType.ABp });
-            Context.Table.Add(new BloodTable() { Type = BloodType.ABn });
-            Context.Table.Add(new BloodTable() { Type = BloodType.Op });
-            Context.Table.Add(new BloodTable() { Type = BloodType.On });
+            Context.Inventory.Add(new BloodTable() { Type = BloodType.An });
+            Context.Inventory.Add(new BloodTable() { Type = BloodType.Bp });
+            Context.Inventory.Add(new BloodTable() { Type = BloodType.Bn });
+            Context.Inventory.Add(new BloodTable() { Type = BloodType.ABp });
+            Context.Inventory.Add(new BloodTable() { Type = BloodType.ABn });
+            Context.Inventory.Add(new BloodTable() { Type = BloodType.Op });
+            Context.Inventory.Add(new BloodTable() { Type = BloodType.On });
 
 
             Context.SaveChanges();

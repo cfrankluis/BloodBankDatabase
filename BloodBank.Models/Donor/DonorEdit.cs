@@ -27,8 +27,8 @@ namespace BloodBank.Models.Donor
         public BloodType BloodType { get; set; }
 
         [Required]
-        [Display(Name = "Birth Date")]
         [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
         public DateTime BirthDate { get; set; }
     }
 }
