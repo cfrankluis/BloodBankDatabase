@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BloodBank.Data;
-using BloodBank.Models.Patient;
+using BloodBank.Models.PatientModels;
 using BloodBank.Service;
 
 namespace BloodBank.MVC.Controllers
@@ -14,45 +14,21 @@ namespace BloodBank.MVC.Controllers
     {
         private readonly PatientService _service = new PatientService();
 
-        // GET: Patient
         public ActionResult Index()
         {
-            return View(_service.GetAllPatients());
+            return View();
         }
 
-        public ActionResult Create()
+        public ActionResult PartialIndex()
         {
-            var viewModel = new PatientCreate();
-
-            return View(viewModel);
-            
+            return PartialView("_Index",_service.GetAllPatients());
         }
 
         public ActionResult _PartialCreate()
         {
             var viewModel = new PatientCreate();
 
-            TempData["PatientCreate"] = viewModel;
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult _PartialCreate(PatientCreate model)
-        {
-            if (ModelState.IsValid)
-            {
-                if (_service.CreatePatient(model))
-                {
-                    TempData["SaveResult"] = "A new patient was created.";
-                    return RedirectToAction("Index");
-                }
-            }
-
-            ModelState.AddModelError("", "Patient could not be created.");
-
-            return View(model);
+            return PartialView("_PartialCreate",viewModel);
         }
 
         [HttpPost]
@@ -70,23 +46,9 @@ namespace BloodBank.MVC.Controllers
 
             ModelState.AddModelError("", "Patient could not be created.");
 
-            return View(model);
+            return PartialView("_PartialCreate",model);
         }
 
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
-
-            var model = _service.GetPatientByID((int)id);
-
-            if (model is null)
-                return HttpNotFound();
-
-            return View(model);
-        }
-
-        [ActionName("_PartialDetails")]
         public ActionResult _PartialDetails(int? id)
         {
             if (id == null)

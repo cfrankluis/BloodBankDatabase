@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BloodBagService.cs" />
+    <Compile Include="BloodOrderService.cs" />
     <Compile Include="DonorAppointmentService.cs" />
     <Compile Include="DonorService.cs" />
     <Compile Include="PatientService.cs" />

@@ -6,27 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Data;
 
-
-namespace BloodBank.Models.Patient
+namespace BloodBank.Models.PatientModels
 {
-    public class PatientCreate
+    public class PatientEdit
     {
+        [Required]
+        public int PatientID { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
-        
+
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
-        [Display(Name = "Blood Type")]
         [EnumDataType(typeof(BloodType))]
+        [Display(Name = "Blood Type")]
         public BloodType BloodType { get; set; }
 
         [Required]
-        [Display(Name = "Birth Date")]
         [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
         public DateTime BirthDate { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Data;
 
-namespace BloodBank.Models.Patient
+namespace BloodBank.Models.PatientModels
 {
     public class PatientListItem
     {

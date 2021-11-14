@@ -1,55 +1,43 @@
-﻿@model BloodBank.Models.Patient.PatientDetail
+﻿@model BloodBank.Models.PatientModels.PatientDetail
 
-<div>
+<div class="row">
     <h2>Patient Information</h2>
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
+    
+    <div class="col-sm-3">
+        <dl class="dl-horizontal">
+            <dt>@Html.LabelFor(model => model.FirstName)</dt>
+            <dd>@Html.DisplayFor(model => model.FirstName)</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+            <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
+            <dd>@Html.DisplayFor(model => model.LastName)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+        </dl>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+    <div class="col-sm-3">
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.BirthDate)</dt>
+            <dd>@Html.DisplayFor(model => model.BirthDate)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
+            <dt>@Html.DisplayNameFor(model => model.CheckInDate)</dt>
+            <dd>@Html.DisplayFor(model => model.CheckInDate)</dd>
+        </dl>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
+    <div class="col-sm-2">
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Age)</dt>
+            <dd>@Html.DisplayFor(model => model.Age)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
+            <dt>@Html.DisplayNameFor(model => model.BloodType)</dt>
+            <dd>@Html.DisplayFor(model => model.BloodValue)</dd>
+        </dl>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.BirthDate)
-        </dd>
+</div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CheckInDate)
-        </dt>
+<hr />
 
-        <dd>
-            @Html.DisplayFor(model => model.CheckInDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BloodType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BloodValue)
-        </dd>
-
-    </dl>
+<div class="row">
+    @{ Html.RenderAction("Index", "BloodOrder", new {id = Model.PatientID });}
 </div>

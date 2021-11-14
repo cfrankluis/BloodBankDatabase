@@ -7,14 +7,23 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style type="text/css">
+        @@media (min-width: 1200px) {
+            .container{
+                max-width:inherit;
+            }
+        }
+    </style>
+
 </head>
 <body>
     @Html.Partial("_MenuBar")
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - BloodBank</p>
+        
+        <footer class="fixed-bottom bg-dark align-content-center">
+            <hr />
+            <p class="text-light">&copy; @DateTime.Now.Year - BloodBank</p>
         </footer>
     </div>
 

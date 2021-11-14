@@ -76,11 +76,11 @@ namespace BloodBank.MVC.Controllers
         {
             if(_service.DeleteDonor(id))
             {
-                TempData["SaveResult"] = "A patient was deleted.";
+                TempData["SaveResult"] = "A donor was deleted.";
                 return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError("", "Patient could not be created.");
+            ModelState.AddModelError("", "Donor could not be deleted.");
 
             return View();
         }

@@ -1,38 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 using BloodBank.Data;
 
-namespace BloodBank.Models.Patient
+namespace BloodBank.Models.BloodOrder
 {
-    public class PatientDetail
+    public class BloodOrderDetail
     {
-        public int PatientID { get; set; }
-        
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
-
-        [Display(Name = "Age")]
-        public int Age { get; set; }
+        public int ID { get; set; }
 
         [Display(Name = "Blood Type")]
-        [EnumDataType(typeof(BloodType))]
         public BloodType BloodType { get; set; }
 
-        [Display(Name = "Birth Date")]
-        [DataType(DataType.Date)]
-        public DateTime BirthDate { get; set; }
+        [Display(Name = "Patient Name")]
+        public string PatientName { get; set; }
 
-        [Display(Name = "Check in Date")]
-        [DataType(DataType.Date)]
-        public DateTime CheckInDate { get; set; }
+        [Display(Name = "Amount")]
+        public double Amount { get; set; }
 
+        [Display(Name = "Order Date")]
+        public DateTime OrderDate { get; set; }
 
         public string BloodValue
         {
@@ -62,8 +52,5 @@ namespace BloodBank.Models.Patient
             }
             private set { }
         }
-
-
-
     }
 }

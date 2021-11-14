@@ -46,6 +46,10 @@
     <Compile Include="BloodBag\BloodBagDetail.cs" />
     <Compile Include="BloodBag\BloodBagEdit.cs" />
     <Compile Include="BloodBag\BloodBagListItem.cs" />
+    <Compile Include="BloodOrder\BloodOrderEdit.cs" />
+    <Compile Include="BloodOrder\BloodOrderCreate.cs" />
+    <Compile Include="BloodOrder\BloodOrderDetail.cs" />
+    <Compile Include="BloodOrder\BloodOrderListItem.cs" />
     <Compile Include="DonorAppointment\AppoinmentListItem.cs" />
     <Compile Include="DonorAppointment\AppointmentCreate.cs" />
     <Compile Include="DonorAppointment\AppointmentDetail.cs" />
@@ -54,10 +58,10 @@
     <Compile Include="Donor\DonorDetail.cs" />
     <Compile Include="Donor\DonorEdit.cs" />
     <Compile Include="Donor\DonorListItem.cs" />
-    <Compile Include="Patient\PatientCreate.cs" />
-    <Compile Include="Patient\PatientDetail.cs" />
-    <Compile Include="Patient\PatientEdit.cs" />
-    <Compile Include="Patient\PatientListItem.cs" />
+    <Compile Include="PatientModels\PatientCreate.cs" />
+    <Compile Include="PatientModels\PatientDetail.cs" />
+    <Compile Include="PatientModels\PatientEdit.cs" />
+    <Compile Include="PatientModels\PatientListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

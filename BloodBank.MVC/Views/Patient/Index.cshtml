@@ -1,72 +1,27 @@
-﻿@model IEnumerable<BloodBank.Models.Patient.PatientListItem>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row">
     <div id="patientList" class="col-sm-6">
-        <h2>Patients List</h2>
-
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Name)
-
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Age)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.BloodType)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CheckInDate)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(item.Name, "_PartialDetails", new { id = item.PatientID })
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Age)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BloodValue)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CheckInDate)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.PatientID })
-                    </td>
-                </tr>
-            }
-
-        </table>
+        @{Html.RenderAction("PartialIndex");}
     </div>
 
+    <div class="col-sm-6 ">
+        @if (TempData.ContainsKey("PatientDetails"))
+        {
+            <div id="patientDetail">
+                @Html.Partial("_PartialDetails", (BloodBank.Models.PatientModels.PatientDetail)TempData["PatientDetails"])
+            </div>
+        }
+    </div>
+</div>
 
-    @if (TempData.ContainsKey("PatientDetails"))
-    {
-        <div id="patientDetail" class="col-sm-6 ">
-            @Html.Partial("_PartialDetails", (BloodBank.Models.Patient.PatientDetail)TempData["PatientDetails"]);
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @{ Html.RenderAction("_PartialCreate");}
         </div>
-    }
-
-
-    @if (TempData.ContainsKey("PatientCreate"))
-    {
-        @Html.Partial("_PartialCreate", (BloodBank.Models.Patient.PatientCreate)TempData["PatientCreate"]);
-    }
+    </div>
 </div>

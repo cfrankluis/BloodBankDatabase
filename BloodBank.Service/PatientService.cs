@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BloodBank.Models.Patient;
+using BloodBank.Models.PatientModels;
 using BloodBank.Data;
 
 namespace BloodBank.Service

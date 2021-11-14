@@ -58,8 +58,7 @@ namespace BloodBank.Service
                 return
                     new AppointmentDetail
                     {
-                        DonorFirstName = entity.Donor.FirstName,
-                        DonorLastName = entity.Donor.LastName,
+                        DonorId = entity.DonorID,
                         AppoinmentTime = entity.AppointmentTime,
                         Status = entity.Status
                     };
