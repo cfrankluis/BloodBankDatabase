@@ -1,17 +1,31 @@
 ﻿@model IEnumerable<BloodBank.Models.PatientModels.PatientListItem>
 
+@{
+    AjaxOptions DetailOptions = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "patientDetail"
+    };
+
+    AjaxOptions FormOptions = new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "modal-placeholder",
+        OnSuccess = "$('#myModal').modal('show')"
+
+    };
+}
 
 <h2>Patients List</h2>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-    New Patient
-</button>
+
+@Ajax.ActionLink("New Patient", "_PartialCreate","" ,FormOptions, htmlAttributes: new { @class = "btn btn-primary", @type = "button" })
 
 @if (TempData.ContainsKey("SaveResult"))
 {
-    <div class="alert-success alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert">
-            <span>&times;</span>
-        </button>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         @TempData["SaveResult"]
     </div>
 }
@@ -40,7 +54,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(item.Name, "_PartialDetails", new { id = item.PatientID })
+                @Ajax.ActionLink(item.Name, "_PartialDetails", new { id = item.PatientID }, DetailOptions)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Age)
@@ -51,9 +65,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CheckInDate)
             </td>
+            
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PatientID })
+                @Ajax.ActionLink("Edit", "_PartialEdit", new { id = item.PatientID }, FormOptions) |
+                @Ajax.ActionLink("Delete", "_PartialDelete", new { id = item.PatientID }, FormOptions)
             </td>
         </tr>
     }

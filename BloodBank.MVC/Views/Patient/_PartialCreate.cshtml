@@ -6,7 +6,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
-@using (Html.BeginForm("Create", "Patient", FormMethod.Post))
+@using (Ajax.BeginForm("Create", "Patient", new AjaxOptions {HttpMethod="POST", UpdateTargetId="modal-placeholder" }))
 {
     <div class="modal-body">
 

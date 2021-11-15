@@ -24,6 +24,7 @@ namespace BloodBank.MVC.Controllers
             return PartialView("_Index",_service.GetAllPatients());
         }
 
+        [HttpPost]
         public ActionResult _PartialCreate()
         {
             var viewModel = new PatientCreate();
@@ -33,6 +34,7 @@ namespace BloodBank.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [HandleError]
         public ActionResult Create(PatientCreate model)
         {
             if (ModelState.IsValid)
@@ -49,19 +51,21 @@ namespace BloodBank.MVC.Controllers
             return PartialView("_PartialCreate",model);
         }
 
+        [HttpPost]
         public ActionResult _PartialDetails(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            TempData["PatientDetails"] = _service.GetPatientByID((int)id);
-            if (TempData["PatientDetails"] is null)
+            var model = _service.GetPatientByID((int)id);
+            if (model is null)
                 return HttpNotFound();
 
-            return RedirectToAction("Index");
+            return PartialView("_PartialDetails", model);
         }
 
-        public ActionResult Delete(int? id)
+        [HttpPost]
+        public ActionResult _PartialDelete(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
@@ -71,7 +75,7 @@ namespace BloodBank.MVC.Controllers
             if (model is null)
                 return HttpNotFound();
 
-            return View(model);
+            return PartialView("_PartialDelete", model);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -86,10 +90,11 @@ namespace BloodBank.MVC.Controllers
 
             ModelState.AddModelError("", "Patient could not be created.");
 
-            return View();
+            return PartialView("_PartialDelete");
         }
 
-        public ActionResult Edit(int? id)
+        [HttpPost]
+        public ActionResult _PartialEdit(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
@@ -108,11 +113,12 @@ namespace BloodBank.MVC.Controllers
                 BirthDate = detail.BirthDate
             };
 
-            return View(viewModel);
+            return PartialView("_PartialEdit", viewModel);
         }
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
+        [HandleError]
         public ActionResult Edit(int id, PatientEdit model)
         {
             if (ModelState.IsValid)
@@ -120,7 +126,7 @@ namespace BloodBank.MVC.Controllers
                 if (model.PatientID != id)
                 {
                     ModelState.AddModelError("", "ID Mismatch");
-                    return View(model);
+                    return PartialView("_PartialEdit", model);
                 }
 
                 if(_service.UpdatePatient(model))
@@ -131,7 +137,7 @@ namespace BloodBank.MVC.Controllers
             }
 
             ModelState.AddModelError("", "Patient could not be updated");
-            return View(model);
+            return PartialView("_PartialEdit",model);
         }
     }
 }

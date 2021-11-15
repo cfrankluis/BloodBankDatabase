@@ -1,0 +1,54 @@
+﻿@model BloodBank.Models.PatientModels.PatientDetail
+
+<div class="modal-header">
+    <h4 class="modal-title">Are you sure you want to delete this?</h4>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body">
+    <div class="row">
+        <h4>Patient Information</h4>
+
+        <div class="col-sm-3">
+            <dl class="dl-horizontal">
+                <dt>@Html.LabelFor(model => model.FirstName)</dt>
+                <dd>@Html.DisplayFor(model => model.FirstName)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
+                <dd>@Html.DisplayFor(model => model.LastName)</dd>
+
+            </dl>
+        </div>
+
+        <div class="col-sm-3">
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.BirthDate)</dt>
+                <dd>@Html.DisplayFor(model => model.BirthDate)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.CheckInDate)</dt>
+                <dd>@Html.DisplayFor(model => model.CheckInDate)</dd>
+            </dl>
+        </div>
+
+        <div class="col-sm-2">
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => model.Age)</dt>
+                <dd>@Html.DisplayFor(model => model.Age)</dd>
+
+                <dt>@Html.DisplayNameFor(model => model.BloodType)</dt>
+                <dd>@Html.DisplayFor(model => model.BloodValue)</dd>
+            </dl>
+        </div>
+
+    </div>
+
+</div>
+
+@using (Html.BeginForm("Delete", "Patient", new { id = Model.PatientID },FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="modal-footer ">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <input type="submit" value="Delete" class="btn btn-primary" />
+    </div>
+}
