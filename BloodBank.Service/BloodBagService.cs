@@ -5,9 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Models.BloodBag;
 using BloodBank.Data;
+using BloodBank.Contracts;
 namespace BloodBank.Service
 {
-    public class BloodBagService
+    public class BloodBagService : IBloodBagService
     {
         public bool CreateBloodBag(BloodBagCreate model)
         {
@@ -33,7 +34,7 @@ namespace BloodBank.Service
                     ctx
                     .BloodBags;
                 var arr = query.ToArray();
-                    
+
 
                 return arr.Select(
                         e => new BloodBagListItem
@@ -42,7 +43,7 @@ namespace BloodBank.Service
                             BloodType = e.BloodType,
                             DaysStored = e.DaysStored.ToString(),
                             Volume = e.Volume
-                        }); 
+                        });
             }
         }
 
@@ -67,7 +68,7 @@ namespace BloodBank.Service
 
         public bool UpdateBloodBag(BloodBagEdit model)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.BloodBags.Find(model.BloodID);
                 if (entity is null) return false;
@@ -80,6 +81,7 @@ namespace BloodBank.Service
                 entity.BloodType = model.BloodType;
                 entity.Volume = model.Volume;
 
+                ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
                 return ctx.SaveChanges() == 1;
             }
         }

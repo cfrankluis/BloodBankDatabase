@@ -75,6 +75,7 @@ namespace BloodBank.Service
                 {
                     ID = entity.ID,
                     BloodType = entity.BloodType,
+                    PatientID = entity.PatientID,
                     PatientName = entity.Patient.FullName,
                     Amount = entity.Amount,
                     OrderDate = entity.OrderDate
@@ -102,7 +103,8 @@ namespace BloodBank.Service
             entity.PatientID = model.PatientID;
             entity.BloodType = model.BloodType;
             entity.Amount = model.Amount;
-            
+
+            _ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
             return _ctx.SaveChanges() == 1;
         }
     }

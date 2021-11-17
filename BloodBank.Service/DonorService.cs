@@ -92,6 +92,7 @@ namespace BloodBank.Service
                 entity.BloodType = model.BloodType;
                 entity.BirthDate = model.BirthDate;
 
+                ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
                 return ctx.SaveChanges() == 1;
             }
         }

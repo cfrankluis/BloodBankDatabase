@@ -6,7 +6,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 </div>
 
-@using (Ajax.BeginForm("Create", "Patient", new AjaxOptions {HttpMethod="POST", UpdateTargetId="modal-placeholder" }))
+@using (Html.BeginForm("Create", "Patient"))
 {
     <div class="modal-body">
 
@@ -20,6 +20,7 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+       
                 </div>
             </div>
 
@@ -52,6 +53,6 @@
     <!-- Modal footer -->
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        <input type="submit" value="Create" class="btn btn-primary" />
+        <input type="submit" value="Create" class="btn btn-primary"/>
     </div>
 }

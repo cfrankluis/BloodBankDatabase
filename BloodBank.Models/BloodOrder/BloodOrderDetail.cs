@@ -12,6 +12,8 @@ namespace BloodBank.Models.BloodOrder
     {
         public int ID { get; set; }
 
+        public int PatientID { get; set; }
+
         [Display(Name = "Blood Type")]
         public BloodType BloodType { get; set; }
 

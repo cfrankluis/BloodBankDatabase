@@ -281,7 +281,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Patient\Edit.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Donor\Index.cshtml" />
     <Content Include="Views\Donor\Details.cshtml" />
@@ -306,6 +305,10 @@
     <Content Include="Views\BloodOrder\Details.cshtml" />
     <Content Include="Views\Patient\_PartialDelete.cshtml" />
     <Content Include="Views\Patient\_PartialEdit.cshtml" />
+    <Content Include="Views\BloodOrder\_PartialDetails.cshtml" />
+    <Content Include="Views\BloodOrder\_PartialCreate.cshtml" />
+    <Content Include="Views\BloodOrder\_PartialDelete.cshtml" />
+    <Content Include="Views\BloodOrder\_PartialEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,6 +320,10 @@
     <Content Include="Scripts\jquery-3.6.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BloodBank.Contracts\BloodBank.Contracts.csproj">
+      <Project>{41ae5ea4-a53c-46ea-944c-f23d33cd4605}</Project>
+      <Name>BloodBank.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BloodBank.Data\BloodBank.Data.csproj">
       <Project>{151143dc-4939-4836-a79b-a2cbcb654ea0}</Project>
       <Name>BloodBank.Data</Name>

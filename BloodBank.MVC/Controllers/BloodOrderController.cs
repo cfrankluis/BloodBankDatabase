@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using BloodBank.Models.BloodOrder;
 using BloodBank.Service;
-using BloodBank.Data;
 
 namespace BloodBank.MVC.Controllers
 {
@@ -13,44 +12,39 @@ namespace BloodBank.MVC.Controllers
     public class BloodOrderController : Controller
     {
         private readonly BloodOrderService _service = new BloodOrderService();
-        
-        // GET: BloodOrder
-/*        public ActionResult Index()
-        {
-            var model = _service.GetAllOrders();
-            return PartialView("_Index",model);
-        }*/
 
-        [ChildActionOnly]
-        public ActionResult Index(int? id)
+        // GET: BloodOrder
+        public ActionResult Index()
+        {
+            return RedirectToAction("Index","Patient");
+        }
+
+        public ActionResult _Index(int? id)
         {
             var model = _service.GetOrdersByPatient((int) id);
 
             if (model is null)
                 return PartialView("_Index");
 
-            return PartialView("_Index",model);
+            TempData["PatientID"] = (int)id;
+
+            return PartialView("_Index", model);
         }
 
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult _PartialCreate(int? id)
         {
-            var model = new BloodOrderCreate();
-            var patientService = new PatientService();
-            TempData["Patients"] =
-                patientService
-                .GetAllPatients()
-                .Select(
-                    e => new SelectListItem
-                    {
-                        Text = e.Name,
-                        Value = e.PatientID.ToString()
-                    });
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
 
-            return View(model);
+            var model = new BloodOrderCreate();
+            model.PatientID = (int)id;
+            return PartialView("_PartialCreate",model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [HandleError]
         public ActionResult Create(BloodOrderCreate model)
         {
             if (ModelState.IsValid)
@@ -64,10 +58,11 @@ namespace BloodBank.MVC.Controllers
 
             ModelState.AddModelError("", "Order could not be created.");
 
-            return View(model);
+            return PartialView("_PartialCreate",model);
         }
 
-        public ActionResult Details(int? id)
+        [HttpPost]
+        public ActionResult _PartialDetails(int? id)
         {
             if (id == null)
                 return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
@@ -77,7 +72,82 @@ namespace BloodBank.MVC.Controllers
             if (model is null)
                 return HttpNotFound();
 
-            return View(model);
+            return PartialView("_PartialDetails",model);
+        }
+
+        [HttpPost]
+        public ActionResult _PartialDelete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            var model = _service.GetOrderByID((int)id);
+
+            if (model is null)
+                return HttpNotFound();
+
+            return PartialView("_PartialDelete", model);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            if (_service.DeleteOrder(id))
+            {
+                TempData["SaveResult"] = "An order was deleted.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Order could not be deleted.");
+
+            return PartialView("_PartialDelete");
+        }
+
+        [HttpPost]
+        public ActionResult _PartialEdit(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            var detail = _service.GetOrderByID((int)id);
+
+            if (detail is null)
+                return HttpNotFound();
+
+            var viewModel = new BloodOrderEdit
+            {
+                Amount = detail.Amount,
+                BloodType = detail.BloodType,
+                ID = detail.ID,
+                PatientID = detail.PatientID
+            };
+
+            return PartialView("_PartialEdit", viewModel);
+        }
+
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        [HandleError]
+        public ActionResult Edit(int id, BloodOrderEdit model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.ID != id)
+                {
+                    ModelState.AddModelError("", "ID Mismatch");
+                    return PartialView("_PartialEdit", model);
+                }
+
+                if (_service.EditOrder(model))
+                {
+                    TempData["SaveResult"] = "An order was updated";
+                    return RedirectToAction("Index");
+                }
+            }
+
+            ModelState.AddModelError("", "Order could not be updated");
+            return PartialView("_PartialEdit", model);
         }
     }
 }

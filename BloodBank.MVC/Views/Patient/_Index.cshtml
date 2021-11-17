@@ -20,8 +20,6 @@
 
 <h2>Patients List</h2>
 
-@Ajax.ActionLink("New Patient", "_PartialCreate","" ,FormOptions, htmlAttributes: new { @class = "btn btn-primary", @type = "button" })
-
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -30,7 +28,7 @@
     </div>
 }
 
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped table-sm">
     <thead>
         <tr>
             <th>
@@ -46,7 +44,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CheckInDate)
             </th>
-            <th></th>
+            <th>
+                @Ajax.ActionLink("New Patient", "_PartialCreate", "", FormOptions, htmlAttributes: new { @class = "btn btn-success btn-sm", @type = "button" })
+            </th>
         </tr>
     </thead>
 
@@ -67,8 +67,8 @@
             </td>
             
             <td>
-                @Ajax.ActionLink("Edit", "_PartialEdit", new { id = item.PatientID }, FormOptions) |
-                @Ajax.ActionLink("Delete", "_PartialDelete", new { id = item.PatientID }, FormOptions)
+                @Ajax.ActionLink("Edit", "_PartialEdit", new { id = item.PatientID }, FormOptions, htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })
+                @Ajax.ActionLink("Delete", "_PartialDelete", new { id = item.PatientID }, FormOptions, htmlAttributes: new { @class = "btn btn-danger btn-sm", @type = "button" })
             </td>
         </tr>
     }

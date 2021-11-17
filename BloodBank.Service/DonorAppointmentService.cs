@@ -91,6 +91,7 @@ namespace BloodBank.Service
                 entity.AppointmentTime = model.AppointmentTime;
                 entity.DonorID = model.DonorId;
 
+                ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
                 return ctx.SaveChanges() == 1;
             }
         }
