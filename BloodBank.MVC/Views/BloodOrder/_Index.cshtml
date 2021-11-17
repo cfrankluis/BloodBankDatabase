@@ -33,40 +33,45 @@
 }
 
 <table class="table table-hover table-striped table-sm">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BloodType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OrderDate)
-        </th>
-        <th>
-            @Ajax.ActionLink("New Order", "_PartialCreate", new { id = _id} ,FormOptions, htmlAttributes: new { @class = "btn btn-success btn-sm", @type = "button" })
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BloodValue)
-            </td>
-            <td style="width:20%">
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td style="width:30%">
-                @Ajax.ActionLink("Edit", "_PartialEdit", new { id = item.ID }, FormOptions, htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })
-                @Ajax.ActionLink("Details", "_PartialDetails", new { id = item.ID }, DetailOptions, htmlAttributes: new { @class = "btn btn-warning btn-sm", @type = "button" })
-                @Ajax.ActionLink("Delete", "_PartialDelete", new { id = item.ID }, FormOptions, htmlAttributes: new { @class = "btn btn-danger btn-sm", @type = "button" })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+            </th>
+            <th>
+                @Ajax.ActionLink("New Order", "_PartialCreate", new { id = _id }, FormOptions, htmlAttributes: new { @class = "btn btn-success btn-sm", @type = "button" })
+            </th>
         </tr>
-    }
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodValue)
+                </td>
+                <td style="width:20%">
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td style="width:30%">
+                    @Ajax.ActionLink("Edit", "_PartialEdit", new { id = item.ID }, FormOptions, htmlAttributes: new { @class = "btn btn-primary btn-sm", @type = "button" })
+                    @Ajax.ActionLink("Details", "_PartialDetails", new { id = item.ID }, DetailOptions, htmlAttributes: new { @class = "btn btn-warning btn-sm", @type = "button" })
+                    @Ajax.ActionLink("Delete", "_PartialDelete", new { id = item.ID }, FormOptions, htmlAttributes: new { @class = "btn btn-danger btn-sm", @type = "button" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
 </table>
 
 

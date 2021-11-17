@@ -35,20 +35,6 @@ namespace BloodBank.MVC.Controllers
             return View(model);
         }
 
-        [HttpGet, ActionName("Detail"), ]
-        public ActionResult Detail(int? id)
-        {
-/*            if (id == null)
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);*/
-
-            var model = _service.GetBloodBagByID((int)id);
-
-            if (model is null)
-                return HttpNotFound();
-
-            return PartialView("Detail",model);
-        }
-
         public ActionResult Create()
         {
             var model = new BloodBagCreate();

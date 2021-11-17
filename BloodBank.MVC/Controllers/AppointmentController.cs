@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using BloodBank.Models.DonorAppointment;
 using BloodBank.Service;
+using BloodBank.Contracts;
 
 namespace BloodBank.MVC.Controllers
 {
     [Authorize]
     public class AppointmentController : Controller
     {
-        private readonly DonorAppointmentService _service = new DonorAppointmentService();
+        private readonly IDonorAppointmentService _service = new DonorAppointmentService();
 
         // GET: Appointment
         public ActionResult Index()

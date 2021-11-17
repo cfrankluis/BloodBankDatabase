@@ -30,7 +30,7 @@ table {
     display: flex;
     flex-flow: column;
     width: 100%;
-    margin-bottom: 0;
+    max-height: 60vh;
 }
 
 thead {

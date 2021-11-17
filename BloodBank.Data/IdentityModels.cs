@@ -51,7 +51,7 @@ namespace BloodBank.Data
                 .Add(new IdentityUserRoleConfiguration());
         }
 
-        public void Seed(ApplicationDbContext Context)
+/*        public void Seed(ApplicationDbContext Context)
         {
 
             // Create my debug (testing) objects here
@@ -98,7 +98,7 @@ namespace BloodBank.Data
             #else
             Database.SetInitializer<MyDbContext> (new CreateInitializer ());
             #endif
-        }
+        }*/
     }
 
     public class IdentityUserLoginConfiguration : EntityTypeConfiguration<IdentityUserLogin>

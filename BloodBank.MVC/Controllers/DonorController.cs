@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using BloodBank.Models.Donor;
 using BloodBank.Service;
+using BloodBank.Contracts;
 
 namespace BloodBank.MVC.Controllers
 {
     [Authorize]
     public class DonorController : Controller
     {
-        private readonly DonorService _service = new DonorService(); 
+        private readonly IDonorService _service = new DonorService();
 
         // GET: Donor
         public ActionResult Index()

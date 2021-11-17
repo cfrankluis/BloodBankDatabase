@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BloodBank.Data;
 using BloodBank.Models.PatientModels;
 using BloodBank.Service;
+using BloodBank.Contracts;
 
 namespace BloodBank.MVC.Controllers
 {
     [Authorize]
     public class PatientController : Controller
     {
-        private readonly PatientService _service = new PatientService();
+        private readonly IPatientService _service = new PatientService();
 
         public ActionResult Index()
         {

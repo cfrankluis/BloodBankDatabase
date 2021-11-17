@@ -42,6 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBloodBagService.cs" />
+    <Compile Include="IBloodOrderService.cs" />
+    <Compile Include="IDonorAppointmentService.cs" />
+    <Compile Include="IDonorService.cs" />
+    <Compile Include="IPatientService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

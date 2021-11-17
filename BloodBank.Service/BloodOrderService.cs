@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Data;
 using BloodBank.Models.BloodOrder;
+using BloodBank.Contracts;
 
 namespace BloodBank.Service
 {
-    public class BloodOrderService
+    public class BloodOrderService : IBloodOrderService
     {
         private readonly ApplicationDbContext _ctx = new ApplicationDbContext();
 
@@ -20,7 +21,7 @@ namespace BloodBank.Service
                 BloodType = model.BloodType,
                 Amount = model.Amount,
                 OrderDate = DateTime.Now
-                
+
             };
 
             _ctx.Orders.Add(entity);
@@ -34,7 +35,7 @@ namespace BloodBank.Service
                 _ctx
                 .Orders
                 .Select(
-                    e => new BloodOrderListItem 
+                    e => new BloodOrderListItem
                     {
                         ID = e.ID,
                         BloodType = e.BloodType,

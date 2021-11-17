@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Data;
 using BloodBank.Models.DonorAppointment;
+using BloodBank.Contracts;
 
 namespace BloodBank.Service
 {
-    public class DonorAppointmentService
+    public class DonorAppointmentService : IDonorAppointmentService
     {
         public bool AppointmentCreate(AppointmentCreate model)
         {
@@ -17,10 +18,10 @@ namespace BloodBank.Service
                 DonorID = model.DonorId,
                 AppointmentTime = model.AppointmentDate,
                 Status = StatusValues.UPCOMING
-                
+
             };
 
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
                 ctx.Appointments.Add(entity);
                 return ctx.SaveChanges() == 1;
@@ -35,7 +36,27 @@ namespace BloodBank.Service
                     ctx
                     .Appointments
                     .Select(
-                        e => new AppoinmentListItem 
+                        e => new AppoinmentListItem
+                        {
+                            AppoinmentTime = e.AppointmentTime,
+                            DonorName = e.Donor.FullName,
+                            Status = e.Status
+                        });
+
+                return query.ToArray();
+            }
+        }
+
+        public IEnumerable<AppoinmentListItem> GetAllAppointmentsByDonor(Guid id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                    ctx
+                    .Appointments
+                    .Where(e => e.DonorID == id)
+                    .Select(
+                        e => new AppoinmentListItem
                         {
                             AppoinmentTime = e.AppointmentTime,
                             DonorName = e.Donor.FullName,
@@ -64,6 +85,7 @@ namespace BloodBank.Service
                     };
             }
         }
+
 
         public bool DeleteAppointment(int id)
         {

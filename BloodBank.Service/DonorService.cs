@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Data;
 using BloodBank.Models.Donor;
+using BloodBank.Contracts;
 
 namespace BloodBank.Service
 {
-    public class DonorService
+    public class DonorService : IDonorService
     {
         public bool CreateDonor(DonorCreate model)
         {

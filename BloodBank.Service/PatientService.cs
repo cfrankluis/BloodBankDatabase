@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using BloodBank.Models.PatientModels;
 using BloodBank.Data;
+using BloodBank.Contracts;
 
 namespace BloodBank.Service
 {
-    public class PatientService
+    public class PatientService : IPatientService
     {
         public bool CreatePatient(PatientCreate model)
         {
@@ -83,7 +84,7 @@ namespace BloodBank.Service
         {
             using (var ctx = new ApplicationDbContext())
             {
-                var entity = 
+                var entity =
                     ctx
                     .Patients
                     .SingleOrDefault(e => e.ID == model.PatientID);
@@ -96,6 +97,7 @@ namespace BloodBank.Service
                 entity.BloodType = model.BloodType;
                 entity.BirthDate = model.BirthDate;
 
+                ctx.Entry(entity).State = System.Data.Entity.EntityState.Modified;
                 return ctx.SaveChanges() == 1;
             }
         }

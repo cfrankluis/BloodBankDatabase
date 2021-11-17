@@ -5,13 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using BloodBank.Models.BloodOrder;
 using BloodBank.Service;
+using BloodBank.Contracts;
 
 namespace BloodBank.MVC.Controllers
 {
     [Authorize]
     public class BloodOrderController : Controller
     {
-        private readonly BloodOrderService _service = new BloodOrderService();
+        private readonly IBloodOrderService _service = new BloodOrderService();
+
+        public BloodOrderController()
+        {
+
+        }
 
         // GET: BloodOrder
         public ActionResult Index()
